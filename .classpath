@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.watson.safari.xform"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.safari.java.core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.jikespg.uide"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.uide.runtime"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.junit_3.8.1/junit.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lpg"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/polyglot2"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
