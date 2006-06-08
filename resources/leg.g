@@ -1,7 +1,7 @@
 %options package=leg.safari.parser
 %options template=UIDE/dtParserTemplate.gi
 %options import_terminals=LegLexer.gi
--- %options automatic_ast=toplevel,visitor=preorder,ast_directory=./Ast,ast_type=ASTNode
+%options automatic_ast=toplevel,visitor=preorder,ast_directory=./Ast,ast_type=ASTNode
 
 $Globals
     /.import org.eclipse.uide.parser.IParser;
