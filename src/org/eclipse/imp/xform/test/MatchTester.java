@@ -9,6 +9,9 @@ import com.ibm.watson.safari.xform.pattern.matching.Matcher;
 import com.ibm.watson.safari.xform.pattern.parser.ASTPatternLexer;
 import com.ibm.watson.safari.xform.pattern.parser.ASTPatternParser;
 import com.ibm.watson.safari.xform.pattern.parser.Ast.Pattern;
+import com.ibm.watson.safari.xform.pattern.parser.Ast.PatternNode;
+import com.ibm.watson.safari.xform.pattern.parser.Ast.RewriteRule;
+import com.ibm.watson.safari.xform.pattern.rewriting.Rewriter;
 
 public abstract class MatchTester extends TestCase {
     private IASTAdapter fAdapter;
@@ -19,16 +22,14 @@ public abstract class MatchTester extends TestCase {
 
     protected abstract void dumpSource(Object astRoot);
 
-    protected Pattern parsePattern(String patternStr) {
+    protected PatternNode parsePattern(String patternStr) {
         ASTPatternLexer lexer= new ASTPatternLexer(patternStr.toCharArray(), "__PATTERN__");
         ASTPatternParser parser= new ASTPatternParser(lexer.getLexStream());
-    
+
         lexer.lexer(parser); // Why wasn't this done by the parser ctor?
         ASTPatternParser.setASTAdapter(fAdapter);
-    
-        Pattern pattern= parser.parser();
-    
-        return pattern;
+
+        return parser.parser();
     }
 
     protected void testHelper(String patternStr, String srcFile) {
@@ -36,7 +37,7 @@ public abstract class MatchTester extends TestCase {
             System.out.println("\n**** " + getName() + " ****\n");
             fAdapter= getASTAdapter();
 
-            Pattern pattern= parsePattern(patternStr);
+            Pattern pattern= (Pattern) parsePattern(patternStr);
 
             assertNotNull("No AST produced for AST pattern!", pattern);
 
@@ -53,7 +54,38 @@ public abstract class MatchTester extends TestCase {
             System.out.println("Result  = " + m);
             assertNotNull("No match for pattern!", m);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void testRewriteHelper(String rewriteStr, String srcFile) {
+        try {
+            System.out.println("\n**** " + getName() + " ****\n");
+            fAdapter= getASTAdapter();
+
+            RewriteRule rule= (RewriteRule) parsePattern(rewriteStr);
+
+            assertNotNull("No AST produced for AST pattern!", rule);
+
+            Object srcAST= parseSourceFile("resources/" + srcFile);
+    
+            assertNotNull("No AST produced for target source file!", srcAST);
+
+            Matcher matcher= new Matcher((Pattern) rule.getlhs());
+            MatchResult m= fAdapter.findNextMatch(matcher, srcAST, 0);
+
+            System.out.println("Pattern = " + rule);
+            System.out.println("Source  = ");
+            dumpSource(srcAST);
+            System.out.println("Result  = " + m);
+            assertNotNull("No match for pattern!", m);
+
+            Rewriter rewriter= new Rewriter(matcher, (Pattern) rule.getrhs());
+            Object newAST= rewriter.rewrite(m);
+
+            dumpSource(newAST);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -62,7 +94,7 @@ public abstract class MatchTester extends TestCase {
             System.out.println("\n**** " + getName() + " ****\n");
             fAdapter= getASTAdapter();
 
-            Pattern pattern= parsePattern(patternStr);
+            Pattern pattern= (Pattern) parsePattern(patternStr);
 
             assertNotNull("No AST produced for AST pattern!", pattern);
 
