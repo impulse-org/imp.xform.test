@@ -105,15 +105,20 @@ public class PolyglotJavaTester extends MatchTester {
     }
 
     public void test2a() {
-        testHelper("[Expr e { name == 'x' }]", "Simple.jl");
+        testHelper("[Expr e { name = 'x' }]", "Simple.jl");
     }
 
     public void testTargetType1() {
         testHelper("[Expr e:int]", "Simple.jl");
     }
 
+    // [Assign lhs rhs]
     public void testChild1() {
         testHelper("[Assign a [Expr lhs] [Expr rhs]]", "Simple.jl");
+    }
+
+    public void testChild1a() {
+        testHelper("[Assign a { lhs = [lhs { kind = Expr }], rhs = [rhs { kind = Expr } ] } ]", "Simple.jl");
     }
 
     public void testChild2() {
@@ -121,6 +126,19 @@ public class PolyglotJavaTester extends MatchTester {
     }
 
     public void testRewrite1() {
-	testRewriteHelper("[MethodDecl m { name == 'foo' }] => [m]", "Simple.jl");
+	testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m]", "Simple.jl");
     }
+
+    public void testRewrite2() {
+	testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m { name = 'bar' }]", "Simple.jl");
+    }
+
+    public void testRewrite3() {
+	testRewriteHelper("[MethodDecl m { name = 'foo' } [ExprList args] [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]", "Simple.jl");
+    }
+
+    public void testRewrite4() {
+	testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m { args = m.args, body = [Block] } ]", "Simple.jl");
+    }
+    // [For { init= [Expr], cond = [Expr], update = [Expr] } ]
 }
