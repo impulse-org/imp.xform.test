@@ -118,7 +118,7 @@ public class PolyglotJavaTester extends MatchTester {
     }
 
     public void testChild1a() {
-        testHelper("[Assign a { lhs = [lhs { kind = Expr }], rhs = [rhs { kind = Expr } ] } ]", "Simple.jl");
+        testHelper("[Assign a { left = [lhs { kind = Expr }], right = [rhs { kind = Expr } ] } ]", "Simple.jl");
     }
 
     public void testChild2() {
@@ -134,7 +134,11 @@ public class PolyglotJavaTester extends MatchTester {
     }
 
     public void testRewrite3() {
-	testRewriteHelper("[MethodDecl m { name = 'foo' } [ExprList args] [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]", "Simple.jl");
+	testRewriteHelper("[MethodDecl m { name = 'foo' } [List args] [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]", "Simple.jl");
+    }
+
+    public void testRewrite3a() {
+	testRewriteHelper("[MethodDecl m { name = 'foo', args = [ [Formal] [Formal] [Formal] ] } [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]", "Simple.jl");
     }
 
     public void testRewrite4() {
