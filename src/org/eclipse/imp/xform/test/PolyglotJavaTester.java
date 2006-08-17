@@ -1,15 +1,12 @@
 package com.ibm.watson.safari.xform.test;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
-
 import org.eclipse.safari.java.matching.PolyglotASTAdapter;
 import org.eclipse.safari.java.parser.JavaLexer;
 import org.eclipse.safari.java.parser.JavaParser;
-
 import polyglot.ast.Node;
 import polyglot.ext.jl.ast.NodeFactory_c;
 import polyglot.ext.jl.types.TypeSystem_c;
@@ -21,11 +18,10 @@ import polyglot.frontend.Parser;
 import polyglot.frontend.goals.Goal;
 import polyglot.main.Options;
 import polyglot.main.Main.TerminationException;
-import polyglot.util.CodeWriter;
 import polyglot.util.ErrorQueue;
+import polyglot.util.SimpleCodeWriter;
 import polyglot.util.StdErrorQueue;
 import polyglot.visit.PrettyPrinter;
-
 import com.ibm.watson.safari.xform.pattern.matching.IASTAdapter;
 
 public class PolyglotJavaTester extends MatchTester {
@@ -33,7 +29,7 @@ public class PolyglotJavaTester extends MatchTester {
     private static final NodeFactory_c fNodeFactory= new NodeFactory_c();
 
     protected void dumpSource(Object srcAST) {
-	new PrettyPrinter().printAst((Node) srcAST, new CodeWriter(System.out, 120));
+	new PrettyPrinter().printAst((Node) srcAST, new SimpleCodeWriter(System.out, 120));
     }
 
     // RMF 6/8/2006 - Old version that directly calls parser, and so doesn't
