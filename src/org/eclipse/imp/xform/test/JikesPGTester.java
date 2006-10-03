@@ -8,8 +8,9 @@ import org.eclipse.uide.utils.StreamUtils;
 import org.jikespg.uide.parser.JikesPGLexer;
 import org.jikespg.uide.parser.JikesPGParser;
 import org.jikespg.uide.parser.JikesPGParser.ASTNode;
+import org.jikespg.uide.refactoring.JikesPGASTAdapter;
+
 import com.ibm.watson.safari.xform.pattern.matching.IASTAdapter;
-import com.ibm.watson.safari.xform.pattern.matching.JikesPGASTAdapter;
 
 public class JikesPGTester extends MatchTester {
     protected Object parseSourceFile(String srcFilePath) throws Exception {
@@ -20,7 +21,7 @@ public class JikesPGTester extends MatchTester {
 
         lexer.initialize(StreamUtils.readStreamContents(is, "US-ASCII").toCharArray(), srcFilePath);
 	parser.getParseStream().resetTokenStream();
-	parser.setMessageHandler(new SystemOutMessageHandler());
+//	parser.setMessageHandler(new SystemOutMessageHandler());
 	lexer.lexer(null, parser.getParseStream()); // Lex the char stream to produce the token stream
 
         ASTNode ast= (ASTNode) parser.parser();
