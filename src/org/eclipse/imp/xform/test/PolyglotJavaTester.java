@@ -8,13 +8,15 @@ import org.eclipse.safari.java.matching.PolyglotASTAdapter;
 import org.eclipse.safari.java.parser.JavaLexer;
 import org.eclipse.safari.java.parser.JavaParser;
 import polyglot.ast.Node;
-import polyglot.ext.jl.ast.NodeFactory_c;
-import polyglot.ext.jl.types.TypeSystem_c;
+import polyglot.ast.NodeFactory_c;
+import polyglot.types.TypeSystem_c;
+import polyglot.frontend.AbstractExtensionInfo;
 import polyglot.frontend.Compiler;
 import polyglot.frontend.ExtensionInfo;
 import polyglot.frontend.FileSource;
 import polyglot.frontend.Job;
 import polyglot.frontend.Parser;
+import polyglot.frontend.ParserlessJLExtensionInfo;
 import polyglot.frontend.goals.Goal;
 import polyglot.main.Options;
 import polyglot.main.Main.TerminationException;
@@ -49,7 +51,7 @@ public class PolyglotJavaTester extends MatchTester {
 //    }
 
     protected Object parseSourceFile(String srcFilePath) throws Exception {
-	ExtensionInfo ext= new polyglot.ext.jl.ExtensionInfo() {
+	ExtensionInfo ext= new ParserlessJLExtensionInfo() {
 	    public Parser parser(Reader reader, FileSource source, ErrorQueue eq) {
 	        try {
 	            JavaLexer lexer= new JavaLexer(source.path());

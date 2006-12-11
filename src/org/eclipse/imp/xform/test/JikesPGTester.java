@@ -4,11 +4,12 @@ package com.ibm.watson.safari.xform.test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+
+import org.eclipse.safari.jikespg.parser.JikesPGLexer;
+import org.eclipse.safari.jikespg.parser.JikesPGParser;
+import org.eclipse.safari.jikespg.parser.JikesPGParser.ASTNode;
+import org.eclipse.safari.jikespg.refactoring.JikesPGASTAdapter;
 import org.eclipse.uide.utils.StreamUtils;
-import org.jikespg.uide.parser.JikesPGLexer;
-import org.jikespg.uide.parser.JikesPGParser;
-import org.jikespg.uide.parser.JikesPGParser.ASTNode;
-import org.jikespg.uide.refactoring.JikesPGASTAdapter;
 
 import com.ibm.watson.safari.xform.pattern.matching.IASTAdapter;
 
