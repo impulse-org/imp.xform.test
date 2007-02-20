@@ -9,6 +9,6 @@
 	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.junit_3.8.1/junit.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.safari.jikespg.runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/polyglot"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/lpg.javaruntime.v2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lpg.runtime.java"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

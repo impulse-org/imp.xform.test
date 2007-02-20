@@ -1,6 +1,6 @@
 package com.ibm.watson.safari.xform.test;
 
-import lpg.javaruntime.IMessageHandler;
+import lpg.runtime.IMessageHandler;
 
 public class SystemOutMessageHandler implements IMessageHandler {
     public void handleMessage(int errorCode, int [] msgLocation, int[] errorLocation, String filename, String [] errorInfo) {
