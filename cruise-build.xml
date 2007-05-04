@@ -1,15 +1,57 @@
 <project name="com.ibm.watson.safari.xform.test" default="all">
+    <target name="init">
+    	<property name="runtime.version" value="1.0.52"/>
+        <condition property="eclipse.home" value="/usr/lib/eclipse-3.1">
+            <and>
+                <not>
+    	        <isset property="eclipse.home"/>
+    	    </not>
+                <os family="unix"/>
+    	</and>
+        </condition>
+
+        <condition property="eclipse.home" value="f:/eclipse-3.1.2">
+            <and>
+                <not>
+    	        <isset property="eclipse.home"/>
+    	    </not>
+                <os family="windows"/>
+    	</and>
+        </condition>
+
+        <path id="path_eclipse.build.path">
+            <fileset dir="${eclipse.home}/plugins">
+                <include name="**/*.jar"/>
+            </fileset>
+        </path>
+        <pathconvert property="eclipse.build.path" refid="path_eclipse.build.path" targetos="unix"/>
+    </target>
+
     <target name="all" depends="compile, test, jar"/>
 
-    <target name="compile">
-      <cvs command="update -d -P -A"/>
-      <ant antfile="exportPlugin.xml" target="build.jars"/>
+    <target name="update">
+	<cvs command="update -d -P -A"/>
+    </target>
+
+    <target name="compile" depends="init,update">
+	<javac destdir="bin"
+		failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bootclasspath}" source="1.5" target="1.5">
+		<compilerarg line="${compilerArg}"/>
+		<classpath>
+			<pathelement path="../lpg.runtime.java/lpg.runtime_2.0.4.jar"/>
+			<pathelement path="../polyglot/lib/polyglot-epl.jar"/>
+			<pathelement path="../org.eclipse.uide.runtime/org.eclipse.uide.runtime_${runtime.version}.jar"/>
+			<pathelement path="../com.ibm.watson.safari.xform/com.ibm.watson.safari.xform_${runtime.version}.jar"/>
+			<pathelement path="${eclipse.build.path}"/>
+		</classpath>
+		<src path="src/"/>
+	</javac>
     </target>
 
     <target name="test">
     </target>
 
-    <target name="jar" depends="compile">
-        <jar jarfile="target/com.ibm.watson.safari.xform.test.jar" basedir="bin"/>
+    <target name="jar" depends="init,compile">
+        <jar jarfile="com.ibm.watson.safari.xform.test_${runtime.version}.jar" basedir="bin"/>
     </target>
 </project>
