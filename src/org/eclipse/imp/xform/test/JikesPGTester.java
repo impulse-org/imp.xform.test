@@ -1,22 +1,21 @@
-package com.ibm.watson.safari.xform.test;
+package org.eclipse.imp.xform.test;
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.eclipse.safari.jikespg.parser.JikesPGLexer;
-import org.eclipse.safari.jikespg.parser.JikesPGParser;
-import org.eclipse.safari.jikespg.parser.JikesPGParser.ASTNode;
-import org.eclipse.safari.jikespg.refactoring.JikesPGASTAdapter;
-import org.eclipse.uide.utils.StreamUtils;
-
-import com.ibm.watson.safari.xform.pattern.matching.IASTAdapter;
+import org.eclipse.imp.lpg.parser.LPGLexer;
+import org.eclipse.imp.lpg.parser.LPGParser;
+import org.eclipse.imp.lpg.parser.LPGParser.ASTNode;
+import org.eclipse.imp.lpg.refactoring.LPGASTAdapter;
+import org.eclipse.imp.utils.StreamUtils;
+import org.eclipse.imp.xform.pattern.matching.IASTAdapter;
 
 public class JikesPGTester extends MatchTester {
     protected Object parseSourceFile(String srcFilePath) throws Exception {
-        JikesPGLexer lexer= new JikesPGLexer(); // Create the lexer
-        JikesPGParser parser= new JikesPGParser(lexer.getLexStream()); // Create the parser
+        LPGLexer lexer= new LPGLexer(); // Create the lexer
+        LPGParser parser= new LPGParser(lexer.getLexStream()); // Create the parser
         File file= new File(srcFilePath);
         InputStream is= new FileInputStream(file);
 
@@ -31,7 +30,7 @@ public class JikesPGTester extends MatchTester {
     }
 
     protected IASTAdapter getASTAdapter() {
-	return new JikesPGASTAdapter();
+	return new LPGASTAdapter();
     }
 
     protected void dumpSource(Object astRoot) {

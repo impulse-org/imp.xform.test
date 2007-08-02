@@ -1,4 +1,4 @@
-package com.ibm.watson.safari.xform.test;
+package org.eclipse.imp.xform.test;
 
 import lpg.runtime.IMessageHandler;
 

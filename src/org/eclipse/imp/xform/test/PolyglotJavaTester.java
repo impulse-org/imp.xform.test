@@ -1,16 +1,17 @@
-package com.ibm.watson.safari.xform.test;
+package org.eclipse.imp.xform.test;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import org.eclipse.imp.xform.pattern.matching.IASTAdapter;
 import org.eclipse.safari.java.matching.PolyglotASTAdapter;
 import org.eclipse.safari.java.parser.JavaLexer;
 import org.eclipse.safari.java.parser.JavaParser;
+
 import polyglot.ast.Node;
 import polyglot.ast.NodeFactory_c;
-import polyglot.types.TypeSystem_c;
-import polyglot.frontend.AbstractExtensionInfo;
 import polyglot.frontend.Compiler;
 import polyglot.frontend.ExtensionInfo;
 import polyglot.frontend.FileSource;
@@ -20,11 +21,11 @@ import polyglot.frontend.ParserlessJLExtensionInfo;
 import polyglot.frontend.goals.Goal;
 import polyglot.main.Options;
 import polyglot.main.Main.TerminationException;
+import polyglot.types.TypeSystem_c;
 import polyglot.util.ErrorQueue;
 import polyglot.util.SimpleCodeWriter;
 import polyglot.util.StdErrorQueue;
 import polyglot.visit.PrettyPrinter;
-import com.ibm.watson.safari.xform.pattern.matching.IASTAdapter;
 
 public class PolyglotJavaTester extends MatchTester {
     private static final TypeSystem_c fTypeSystem= new TypeSystem_c();

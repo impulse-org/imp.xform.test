@@ -1,17 +1,19 @@
-package com.ibm.watson.safari.xform.test;
+package org.eclipse.imp.xform.test;
 
 
 import java.util.Set;
+
 import junit.framework.TestCase;
-import com.ibm.watson.safari.xform.pattern.matching.IASTAdapter;
-import com.ibm.watson.safari.xform.pattern.matching.MatchResult;
-import com.ibm.watson.safari.xform.pattern.matching.Matcher;
-import com.ibm.watson.safari.xform.pattern.parser.ASTPatternLexer;
-import com.ibm.watson.safari.xform.pattern.parser.ASTPatternParser;
-import com.ibm.watson.safari.xform.pattern.parser.Ast.Pattern;
-import com.ibm.watson.safari.xform.pattern.parser.Ast.PatternNode;
-import com.ibm.watson.safari.xform.pattern.parser.Ast.RewriteRule;
-import com.ibm.watson.safari.xform.pattern.rewriting.Rewriter;
+
+import org.eclipse.imp.xform.pattern.matching.IASTAdapter;
+import org.eclipse.imp.xform.pattern.matching.MatchResult;
+import org.eclipse.imp.xform.pattern.matching.Matcher;
+import org.eclipse.imp.xform.pattern.parser.ASTPatternLexer;
+import org.eclipse.imp.xform.pattern.parser.ASTPatternParser;
+import org.eclipse.imp.xform.pattern.parser.Ast.Pattern;
+import org.eclipse.imp.xform.pattern.parser.Ast.PatternNode;
+import org.eclipse.imp.xform.pattern.parser.Ast.RewriteRule;
+import org.eclipse.imp.xform.pattern.rewriting.Rewriter;
 
 public abstract class MatchTester extends TestCase {
     private IASTAdapter fAdapter;
