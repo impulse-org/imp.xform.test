@@ -4,7 +4,7 @@
 %options automatic_ast=toplevel,visitor=preorder,ast_directory=./Ast,ast_type=ASTNode
 
 $Globals
-    /.import org.eclipse.uide.parser.IParser;
+    /.import org.eclipse.imp.parser.IParser;
     ./
 $End
 
