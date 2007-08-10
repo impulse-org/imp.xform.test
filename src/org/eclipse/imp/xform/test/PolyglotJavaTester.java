@@ -5,10 +5,10 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.imp.java.matching.PolyglotASTAdapter;
+import org.eclipse.imp.java.parser.JavaLexer;
+import org.eclipse.imp.java.parser.JavaParser;
 import org.eclipse.imp.xform.pattern.matching.IASTAdapter;
-import org.eclipse.safari.java.matching.PolyglotASTAdapter;
-import org.eclipse.safari.java.parser.JavaLexer;
-import org.eclipse.safari.java.parser.JavaParser;
 
 import polyglot.ast.Node;
 import polyglot.ast.NodeFactory_c;
