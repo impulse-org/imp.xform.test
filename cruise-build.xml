@@ -1,4 +1,4 @@
-<project name="com.ibm.watson.safari.xform.test" default="all">
+<project name="org.eclipse.imp.xform.test" default="all">
     <target name="init">
     	<property name="runtime.version" value="1.0.52"/>
         <condition property="eclipse.home" value="/usr/lib/eclipse-3.1">
@@ -40,8 +40,8 @@
 		<classpath>
 			<pathelement path="../lpg.runtime.java/lpg.runtime_2.0.4.jar"/>
 			<pathelement path="../polyglot/lib/polyglot-epl.jar"/>
-			<pathelement path="../org.eclipse.uide.runtime/org.eclipse.uide.runtime_${runtime.version}.jar"/>
-			<pathelement path="../com.ibm.watson.safari.xform/com.ibm.watson.safari.xform_${runtime.version}.jar"/>
+			<pathelement path="../org.eclipse.imp.runtime/org.eclipse.imp.runtime_${runtime.version}.jar"/>
+			<pathelement path="../org.eclipse.imp.xform/org.eclipse.imp.xform_${runtime.version}.jar"/>
 			<pathelement path="${eclipse.build.path}"/>
 		</classpath>
 		<src path="src/"/>
@@ -52,6 +52,6 @@
     </target>
 
     <target name="jar" depends="init,compile">
-        <jar jarfile="com.ibm.watson.safari.xform.test_${runtime.version}.jar" basedir="bin"/>
+        <jar jarfile="org.eclipse.imp.xform.test_${runtime.version}.jar" basedir="bin"/>
     </target>
 </project>
