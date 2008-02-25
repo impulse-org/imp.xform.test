@@ -5,7 +5,6 @@
  */
 package org.eclipse.imp.xform.test;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -15,7 +14,7 @@ import org.eclipse.imp.lpg.parser.LPGParser;
 import org.eclipse.imp.lpg.parser.LPGParser.ASTNode;
 import org.eclipse.imp.lpg.refactoring.LPGASTAdapter;
 import org.eclipse.imp.utils.StreamUtils;
-import org.eclipse.imp.xform.pattern.matching.IASTAdapter;
+import org.eclipse.imp.xform.pattern.matching.IASTMatcher;
 
 public class JikesPGTester extends MatchTester {
     protected Object parseSourceFile(String srcFilePath) throws Exception {
@@ -34,7 +33,7 @@ public class JikesPGTester extends MatchTester {
 	return ast;
     }
 
-    protected IASTAdapter getASTAdapter() {
+    protected IASTMatcher getASTAdapter() {
 	return new LPGASTAdapter();
     }
 

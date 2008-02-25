@@ -5,12 +5,11 @@
  */
 package org.eclipse.imp.xform.test;
 
-
 import java.util.Set;
 
 import junit.framework.TestCase;
 
-import org.eclipse.imp.xform.pattern.matching.IASTAdapter;
+import org.eclipse.imp.xform.pattern.matching.IASTMatcher;
 import org.eclipse.imp.xform.pattern.matching.MatchResult;
 import org.eclipse.imp.xform.pattern.matching.Matcher;
 import org.eclipse.imp.xform.pattern.parser.ASTPatternLexer;
@@ -21,9 +20,9 @@ import org.eclipse.imp.xform.pattern.parser.Ast.RewriteRule;
 import org.eclipse.imp.xform.pattern.rewriting.Rewriter;
 
 public abstract class MatchTester extends TestCase {
-    private IASTAdapter fAdapter;
+    private IASTMatcher fAdapter;
 
-    protected abstract IASTAdapter getASTAdapter();
+    protected abstract IASTMatcher getASTAdapter();
 
     protected abstract Object parseSourceFile(String srcFilePath) throws Exception;
 

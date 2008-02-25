@@ -13,7 +13,7 @@ import java.util.Collection;
 import org.eclipse.imp.java.matching.PolyglotASTAdapter;
 import org.eclipse.imp.java.parser.JavaLexer;
 import org.eclipse.imp.java.parser.JavaParser;
-import org.eclipse.imp.xform.pattern.matching.IASTAdapter;
+import org.eclipse.imp.xform.pattern.matching.IASTMatcher;
 
 import polyglot.ast.Node;
 import polyglot.ast.NodeFactory_c;
@@ -96,7 +96,7 @@ public class PolyglotJavaTester extends MatchTester {
 	return j.ast();
     }
 
-    protected IASTAdapter getASTAdapter() {
+    protected IASTMatcher getASTAdapter() {
 	return new PolyglotASTAdapter(fTypeSystem, fNodeFactory);
     }
 
