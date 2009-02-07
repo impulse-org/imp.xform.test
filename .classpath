@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.junit_3.8.1/junit.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.junit_3.8.2.v200706111738/junit.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/polyglot"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/lpg.runtime.java"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.java.core"/>
