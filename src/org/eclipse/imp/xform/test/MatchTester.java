@@ -36,9 +36,9 @@ public abstract class MatchTester extends TestCase {
 
     protected PatternNode parsePattern(String patternStr) {
         ASTPatternLexer lexer= new ASTPatternLexer(patternStr.toCharArray(), "__PATTERN__");
-        ASTPatternParser parser= new ASTPatternParser(lexer.getLexStream());
+        ASTPatternParser parser= new ASTPatternParser(lexer.getILexStream());
 
-        lexer.lexer(parser); // Why wasn't this done by the parser ctor?
+        lexer.lexer(parser.getIPrsStream()); // Why wasn't this done by the parser ctor?
         ASTPatternParser.setASTAdapter(fAdapter);
 
         return parser.parser();

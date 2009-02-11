@@ -43,67 +43,68 @@ public class PolyglotJavaTester extends MatchTester {
     private static final NodeFactory_c fNodeFactory= new NodeFactory_c();
 
     protected void dumpSource(Object srcAST) {
-	new PrettyPrinter().printAst((Node) srcAST, new SimpleCodeWriter(System.out, 120));
+        new PrettyPrinter().printAst((Node) srcAST, new SimpleCodeWriter(System.out, 120));
     }
 
     // RMF 6/8/2006 - Old version that directly calls parser, and so doesn't
     //                run disambiguation pass, and so can't constrain nodes
     //                on their "targetType" attribute.
     //
-//    protected Object parseSourceFile(String srcFilePath) throws Exception {
-//        StdErrorQueue eq= new StdErrorQueue(System.err, 100, "__ERRORS__");
-//        File srcFile= new File(srcFilePath);
-//        FileSource fileSource= new FileSource(srcFile);
-//        JavaLexer lexer= new JavaLexer(srcFilePath);
-//        JavaParser parser= new JavaParser(lexer.getLexStream(), fTypeSystem, fNodeFactory, fileSource, eq);
-//
-//        parser.getParseStream().resetTokenStream();
-//        lexer.lexer(parser.getParseStream()); // Lex the stream to produce the token stream
-//        return parser.parse();
-//    }
+    //    protected Object parseSourceFile(String srcFilePath) throws Exception {
+    //        StdErrorQueue eq= new StdErrorQueue(System.err, 100, "__ERRORS__");
+    //        File srcFile= new File(srcFilePath);
+    //        FileSource fileSource= new FileSource(srcFile);
+    //        JavaLexer lexer= new JavaLexer(srcFilePath);
+    //        JavaParser parser= new JavaParser(lexer.getLexStream(), fTypeSystem, fNodeFactory, fileSource, eq);
+    //
+    //        parser.getParseStream().resetTokenStream();
+    //        lexer.lexer(parser.getParseStream()); // Lex the stream to produce the token stream
+    //        return parser.parse();
+    //    }
 
     protected Object parseSourceFile(String srcFilePath) throws Exception {
-	ExtensionInfo ext= new ParserlessJLExtensionInfo() {
-	    public Parser parser(Reader reader, FileSource source, ErrorQueue eq) {
-	        try {
-	            JavaLexer lexer= new JavaLexer(source.path());
-	            JavaParser parser= new JavaParser(lexer, ts, nf, source, eq);
+        ExtensionInfo ext= new ParserlessJLExtensionInfo() {
+            public Parser parser(Reader reader, FileSource source, ErrorQueue eq) {
+                try {
+                    JavaLexer lexer= new JavaLexer(source.path());
+                    JavaParser parser= new JavaParser(lexer.getILexStream(), ts, nf, source, eq);
 
-	            lexer.lexer(parser);
-	            return parser; // Parse the token stream to produce an AST
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        throw new IllegalStateException("Could not parse " + source.path());
-	    }
-	    public Goal getCompileGoal(Job job) {
-	        return scheduler.TypeChecked(job);
-	    }
-	};
+                    lexer.lexer(parser.getIPrsStream());
+                    return parser; // Parse the token stream to produce an AST
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                throw new IllegalStateException("Could not parse " + source.path());
+            }
 
-	Options options= ext.getOptions();
+            public Goal getCompileGoal(Job job) {
+                return scheduler.TypeChecked(job);
+            }
+        };
 
-	// Allow all objects to get access to the Options object. This hack should
-	// be fixed somehow. XXX###@@@
-	Options.global= options;
+        Options options= ext.getOptions();
 
-	ErrorQueue eq= new StdErrorQueue(System.err, options.error_count, ext.compilerName());
-	Compiler compiler= new Compiler(ext, eq);
-	Collection sources= new ArrayList();
-//        File srcFile= new File(srcFilePath);
-//        FileSource fileSource= new FileSource(srcFile);
+        // Allow all objects to get access to the Options object. This hack should
+        // be fixed somehow. XXX###@@@
+        Options.global= options;
 
-	sources.add(srcFilePath);
-	if (!compiler.compile(sources)) {
-	    throw new TerminationException(1);
-	}
-	Job j= (Job)ext.scheduler().jobs().iterator().next();
+        ErrorQueue eq= new StdErrorQueue(System.err, options.error_count, ext.compilerName());
+        Compiler compiler= new Compiler(ext, eq);
+        Collection<String> sources= new ArrayList<String>();
+        // File srcFile= new File(srcFilePath);
+        // FileSource fileSource= new FileSource(srcFile);
 
-	return j.ast();
+        sources.add(srcFilePath);
+        if (!compiler.compile(sources)) {
+            throw new TerminationException(1);
+        }
+        Job j= (Job) ext.scheduler().jobs().iterator().next();
+
+        return j.ast();
     }
 
     protected IASTMatcher getASTAdapter() {
-	return new PolyglotASTAdapter(fTypeSystem, fNodeFactory);
+        return new PolyglotASTAdapter(fTypeSystem, fNodeFactory);
     }
 
     public void test1() {
@@ -136,23 +137,24 @@ public class PolyglotJavaTester extends MatchTester {
     }
 
     public void testRewrite1() {
-	testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m]", "Simple.jl");
+        testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m]", "Simple.jl");
     }
 
     public void testRewrite2() {
-	testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m { name = 'bar' }]", "Simple.jl");
+        testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m { name = 'bar' }]", "Simple.jl");
     }
 
     public void testRewrite3() {
-	testRewriteHelper("[MethodDecl m { name = 'foo' } [List args] [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]", "Simple.jl");
+        testRewriteHelper("[MethodDecl m { name = 'foo' } [List args] [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]", "Simple.jl");
     }
 
     public void testRewrite3a() {
-	testRewriteHelper("[MethodDecl m { name = 'foo', args = [ [Formal] [Formal] [Formal] ] } [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]", "Simple.jl");
+        testRewriteHelper("[MethodDecl m { name = 'foo', args = [ [Formal] [Formal] [Formal] ] } [Block b]] => [MethodDecl _ args [Block] { name = m.name } ]",
+                "Simple.jl");
     }
 
     public void testRewrite4() {
-	testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m { args = m.args, body = [Block] } ]", "Simple.jl");
+        testRewriteHelper("[MethodDecl m { name = 'foo' }] => [m { args = m.args, body = [Block] } ]", "Simple.jl");
     }
     // [For { init= [Expr], cond = [Expr], update = [Expr] } ]
 }
