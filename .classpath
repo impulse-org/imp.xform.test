@@ -6,7 +6,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/polyglot"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/lpg.runtime.java"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.java.core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.lpg.runtime"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.lpg.ide"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.xform"/>
 	<classpathentry kind="output" path="bin"/>
