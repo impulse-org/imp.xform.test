@@ -2,12 +2,15 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.junit_3.8.2.v200706111738/junit.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/polyglot"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/lpg.runtime.java"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.java.core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.lpg.ide"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.imp.xform"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.compare_3.5.2.r35x_20100113-0800.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.core.runtime_3.5.0.v20090525.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.equinox.common_3.5.1.R35x_v20090807-1100.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
